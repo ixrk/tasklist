@@ -29,6 +29,8 @@ public class UserEntity {
 
     @OneToMany
     @JoinColumn(name = "id_user")
+
     private List<TaskCategoryEntity> categories = new ArrayList<>();
+
 
 }

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -28,6 +29,6 @@ public class UserEntity {
 
     @OneToMany
     @JoinColumn(name = "id_user")
-    private List<CategoryEntity> categories = new ArrayList<>();
+    private List<TaskCategoryEntity> categories;
 
 }

@@ -20,7 +20,7 @@ public class TaskEntity {
     private Priority priority;
 
     @ManyToOne
-    @JoinColumn(name = "id_category")
+    @JoinColumn(name = "id_task")
     private CategoryEntity category;
 
 }

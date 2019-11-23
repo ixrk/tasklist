@@ -28,6 +28,6 @@ public class UserEntity {
 
     @OneToMany
     @JoinColumn(name = "id_user")
-    private List<CategoryEntity> taskList = new ArrayList<>();
+    private List<CategoryEntity> categories = new ArrayList<>();
 
 }

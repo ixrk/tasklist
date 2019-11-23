@@ -1,7 +1,6 @@
 package pl.sda.tasklist.model;
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -29,6 +28,6 @@ public class UserEntity {
 
     @OneToMany
     @JoinColumn(name = "id_user")
-    private List<TaskEntity> taskList = new ArrayList<>();
+    private List<CategoryEntity> taskList = new ArrayList<>();
 
 }

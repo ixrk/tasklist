@@ -10,8 +10,7 @@ import java.util.stream.Collectors;
 
 public class ModelMapper {
 
-    }
-    public TaskDto map(TaskEntity task){
+    public static TaskDto map(TaskEntity task){
         return new TaskDto(task.getUuid(),task.getName(),task.getDescription(), task.isDone(),
                 task.getPriority(),task.getCategory());
     }

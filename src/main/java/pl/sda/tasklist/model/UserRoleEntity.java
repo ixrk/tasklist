@@ -1,5 +1,6 @@
 package pl.sda.tasklist.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Getter
+@Data
 @Entity
 @NoArgsConstructor
 public class UserRoleEntity {

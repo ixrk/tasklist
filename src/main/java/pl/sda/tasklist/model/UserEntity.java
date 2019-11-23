@@ -1,5 +1,6 @@
 package pl.sda.tasklist.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,8 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Getter
+@Data
 @NoArgsConstructor
 public class UserEntity {
 

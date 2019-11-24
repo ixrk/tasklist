@@ -35,6 +35,7 @@ public class ModelMapper {
     public static TaskCategoryDto map(TaskCategoryEntity categoryEntity) {
         TaskCategoryDto categoryDto = new TaskCategoryDto();
         categoryDto.setName(categoryEntity.getName());
+        categoryDto.setUrlName(categoryEntity.getName().toLowerCase().replace(" ", "-"));
         categoryDto.setDescription(categoryEntity.getDescription());
         List<TaskDto> taskDtos = categoryEntity.getTasks().stream()
                 .map(ModelMapper::map)

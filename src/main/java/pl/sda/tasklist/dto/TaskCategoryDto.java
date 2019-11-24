@@ -7,6 +7,7 @@ import java.util.List;
 @Data
 public class TaskCategoryDto {
     private String name;
+    private String urlName;
     private String description;
     private List<TaskDto> tasks;
 }

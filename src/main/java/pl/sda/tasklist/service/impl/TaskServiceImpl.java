@@ -8,9 +8,7 @@ import pl.sda.tasklist.dto.TaskDto;
 import pl.sda.tasklist.mapper.ModelMapper;
 import pl.sda.tasklist.model.TaskEntity;
 import pl.sda.tasklist.service.TaskService;
-
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor

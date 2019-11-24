@@ -9,12 +9,12 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.sda.tasklist.dto.SignUpForm;
-import pl.sda.tasklist.exception.ExistsUserException;
+import pl.sda.tasklist.exception.UserExistsException;
 import pl.sda.tasklist.service.impl.SignUpServiceImpl;
 
 @Controller
 @RequestMapping("/sign-up")
-public class singUpController {
+public class SingUpController {
 
     private final SignUpServiceImpl signUpService;
     private final Validator validator;
@@ -24,20 +24,20 @@ public class singUpController {
         binder.setValidator(validator);
     }
 
-    public singUpController(SignUpServiceImpl signUpService, @Qualifier("signUpValidator")Validator validator) {
+    public SingUpController(SignUpServiceImpl signUpService, @Qualifier("signUpValidator")Validator validator) {
         this.signUpService = signUpService;
         this.validator = validator;
     }
 
     @GetMapping
     public ModelAndView getSignUpPage() {
-        ModelAndView mvn = new ModelAndView("signUp");
-        mvn.addObject("signUpForm", new SignUpForm());
-        return mvn;
+        ModelAndView modelAndView = new ModelAndView("signUp");
+        modelAndView.addObject("signUpForm", new SignUpForm());
+        return modelAndView;
     }
 
     @PostMapping
-    public String createUser(@ModelAttribute @Validated SignUpForm form, BindingResult bindingResult) throws ExistsUserException {
+    public String createUser(@ModelAttribute @Validated SignUpForm form, BindingResult bindingResult) throws UserExistsException {
         if (bindingResult.hasErrors()) {
             return "signUp";
         }

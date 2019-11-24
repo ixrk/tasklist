@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.sda.tasklist.dao.UserRepository;
 import pl.sda.tasklist.dao.UserRoleRepository;
 import pl.sda.tasklist.dto.SignUpForm;
-import pl.sda.tasklist.exception.ExistsUserException;
+import pl.sda.tasklist.exception.UserExistsException;
 import pl.sda.tasklist.model.UserEntity;
 import pl.sda.tasklist.model.UserRoleEntity;
 import pl.sda.tasklist.service.SignUpService;
@@ -29,9 +29,9 @@ public class SignUpServiceImpl implements SignUpService {
     }
 
     @Override
-    public void saveUser(SignUpForm signUpForm) throws ExistsUserException {
+    public void saveUser(SignUpForm signUpForm) throws UserExistsException {
         if (userRepository.existsByUserName(signUpForm.getUserName())) {
-            throw new ExistsUserException("User with name " + signUpForm.getUserName() + " already exists!");
+            throw new UserExistsException("User with name " + signUpForm.getUserName() + " already exists!");
         }
 
         String encodedPassword = passwordEncoder.encode(signUpForm.getPassword());

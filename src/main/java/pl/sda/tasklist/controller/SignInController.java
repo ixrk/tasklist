@@ -8,7 +8,7 @@ import pl.sda.tasklist.dto.SignInForm;
 
 @Controller
 @RequestMapping("/sign-in")
-public class signInController {
+public class SignInController {
 
     @GetMapping
     ModelAndView getSignInPage(){

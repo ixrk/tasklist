@@ -1,28 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout/layout"
-      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout ">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Sign in Page</title>
 </head>
 <body>
-<div layout:fragment="content">
+<div>
     <div class="container">
         <h6>Sign-in</h6>
-<!--        <form th:action="@{/sign-in}" method="post" th:object="${signInForm}">-->
-<!--            <label>Login:</label>-->
-<!--            <input type="text" th:field="*{userName}"/>-->
-<!--&lt;!&ndash;            <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">userName Error</div>&ndash;&gt;-->
-<!--            <br/>-->
-<!--            <label>Password</label>-->
-<!--            <input th:type="password" th:field="*{password}"/>-->
-<!--&lt;!&ndash;            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password Error</div>&ndash;&gt;-->
-<!--            <br/>-->
-<!--            <button th:type="Log in">Sign Up</button>-->
-<!--        </form>-->
         <form th:action="@{/sign-in}" method="post" th:object="${signInForm}">
             <label>UserName</label>
             <input type="text" th:field="*{userName}"/>

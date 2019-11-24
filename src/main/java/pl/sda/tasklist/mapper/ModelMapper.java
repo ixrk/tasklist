@@ -15,13 +15,14 @@ public class ModelMapper {
     }
 
     public static TaskDto mapFormToTaskDto(CreateTaskForm form) {
-        TaskDto taskDto = new TaskDto(
-                UUID.randomUUID().getMostSignificantBits(),
-                form.getName(),
-                form.getDescription(),
-                form.isDone(),
-                form.getPriority(),
-                form.getCategory());
+        TaskDto taskDto = new TaskDto();
+        taskDto.setUuid(Long.toHexString(UUID.randomUUID().getMostSignificantBits()));
+        taskDto.setName(form.getName());
+        taskDto.setDescription(form.getDescription());
+        taskDto.setDone(form.isDone());
+        taskDto.setPriority(form.getPriority());
+        taskDto.setCategory(form.getCategory());
+
         return taskDto;
     }
 

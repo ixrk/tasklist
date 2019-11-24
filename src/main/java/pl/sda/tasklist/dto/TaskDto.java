@@ -3,10 +3,12 @@ package pl.sda.tasklist.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import pl.sda.tasklist.model.Priority;
 import pl.sda.tasklist.model.TaskCategoryEntity;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class TaskDto {
 
@@ -17,8 +19,5 @@ public class TaskDto {
     private Priority priority;
     private TaskCategoryEntity category;
 
-    public TaskDto(long mostSignificantBits, String name, String description, boolean done, Priority priority, TaskCategoryEntity category) {
 
-
-    }
 }

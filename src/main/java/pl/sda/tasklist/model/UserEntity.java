@@ -5,14 +5,15 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Data
+@Entity
 @NoArgsConstructor
 public class UserEntity {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +28,9 @@ public class UserEntity {
     @ManyToMany
     private Set<UserRoleEntity> roles = new HashSet<>();
 
-    @OneToMany
-    @JoinColumn(name = "id_user")
-    private List<TaskCategoryEntity> categories = new ArrayList<>();
-
+    public UserEntity(String userName, String password, LocalDate birthDate) {
+        this.userName = userName;
+        this.password = password;
+        this.birthDate = birthDate;
+    }
 }

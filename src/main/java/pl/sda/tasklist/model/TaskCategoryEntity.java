@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -14,9 +15,10 @@ public class TaskCategoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String description;
+//    private String name;
+//    private String description;
+//
+//    @OneToMany(mappedBy = "category")
+//    private List<TaskEntity> tasks;
 
-    @OneToMany(mappedBy = "category")
-    private List<TaskEntity> tasks;
 }

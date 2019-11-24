@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/layout"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout ">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up Page</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <form th:action="@{/sign-up}" method="post" th:object="${signUpForm}">
+            <label>UserName</label>
+            <input type="text" th:field="*{userName}"/>
+            <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">userName Error</div>
+            <br/>
+            <label>Birth Date</label>
+            <input type="date" th:field="*{birthDate}">
+            <br/>
+            <label>Password</label>
+            <input th:type="password" th:field="*{password}"/>
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password Error</div>
+            <br/>
+            <label>Repeated Password</label>
+            <input th:type="password" th:field="*{repeatedPassword}"/>
+            <div th:if="${#fields.hasErrors('repeatedPassword')}" th:errors="*{repeatedPassword}">repeatedPassword Error</div>
+            <br/>
+            <button th:type="submit">Sign Up</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

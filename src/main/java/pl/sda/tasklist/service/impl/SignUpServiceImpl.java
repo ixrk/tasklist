@@ -35,17 +35,11 @@ public class SignUpServiceImpl implements SignUpService {
         }
 
         String encodedPassword = passwordEncoder.encode(signUpForm.getPassword());
-
         UserEntity userEntity = new UserEntity(signUpForm.getUserName(), encodedPassword, signUpForm.getBirthDate());
-        if (userEntity.getUserName().equalsIgnoreCase("admin")) {
-            UserRoleEntity admin = userRoleRepository.findByName("ROLE_ADMIN");
-            userEntity.getRoles().add(admin);
-        }
-        UserRoleEntity user = userRoleRepository.findByName("ROLE_USER");
-        userEntity.getRoles().add(user);
 
-        userRepository.save(new UserEntity(
-                signUpForm.getUserName(),
-                encodedPassword, signUpForm.getBirthDate()));
+        UserRoleEntity userRole = userRoleRepository.findByName("ROLE_USER");
+        userEntity.getRoles().add(userRole);
+
+        userRepository.save(userEntity);
     }
 }

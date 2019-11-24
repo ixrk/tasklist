@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.sql.DataSource;
+
 @RequiredArgsConstructor
 @Configuration
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -18,8 +20,9 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private static final String[] MATCHERS =
             {"/user/**", "/new-category", "/delete-category", "/new-task", "/delete-task", "/log-out"};
     private static final String[] ADMIN_MATCHERS = {"/admin/**"};
-    private static final String[] GLOBAL_MATCHERS = {"/sign-up","/","/sign-in","/home"};
+    private static final String[] GLOBAL_MATCHERS = {"/sign-up", "/", "/sign-in", "/home"};
     private final UserDetailsService userDetailsService;
+    private final DataSource dataSource;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -43,7 +46,6 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 
-
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -51,6 +53,21 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth
+                .jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery(
+                        "SELECT u.user_name, u.password, 1 "
+                                + "FROM user_entity u "
+                                + "WHERE u.user_name = ?"
+                )
+                .authoritiesByUsernameQuery(
+                        "SELECT u.user_name, r.name, 1 "
+                                + "FROM user_entity u "
+                                + "INNER JOIN user_entity_roles ur ON ur.user_entity_id = u.id "
+                                + "INNER JOIN user_role_entity r ON r.id = ur.roles_id "
+                                + "WHERE u.user_name = ?"
+                )
+                .passwordEncoder(passwordEncoder());
     }
 }

@@ -6,20 +6,19 @@ import pl.sda.tasklist.dto.TaskDto;
 import pl.sda.tasklist.model.TaskCategoryEntity;
 import pl.sda.tasklist.model.TaskEntity;
 
-import java.util.UUID;
-
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class ModelMapper {
 
 
-    public static TaskDto mapTaskEntityToTaskDto(TaskEntity task) {
+    public static TaskDto map(TaskEntity task) {
         return new TaskDto(task.getUuid(),task.getName(),task.getDescription(), task.isDone(),
                 task.getPriority(),task.getCategory());
     }
 
-    public static TaskDto mapFormToTaskDto(CreateTaskForm form) {
+    public static TaskDto map(CreateTaskForm form) {
         TaskDto taskDto = new TaskDto();
         taskDto.setUuid(Long.toHexString(UUID.randomUUID().getMostSignificantBits()));
         taskDto.setName(form.getName());
@@ -41,5 +40,6 @@ public class ModelMapper {
                 .map(ModelMapper::map)
                 .collect(Collectors.toList());
         categoryDto.setTasks(taskDtos);
+        return categoryDto;
     }
 }

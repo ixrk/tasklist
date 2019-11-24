@@ -8,8 +8,7 @@ import java.util.List;
 public interface TaskService {
     TaskDto getTaskById(Long id);
     void addTask(CreateTaskForm form);
-    void deleteTaskById(Long id);
     List<TaskDto> getTasks();
-
+    //    void deleteTaskById(Long id);
 
 }

@@ -5,7 +5,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -13,7 +15,11 @@ import java.util.Set;
 @NoArgsConstructor
 public class UserEntity {
 
-
+    public UserEntity(String userName, String password, LocalDate birthDate) {
+        this.userName = userName;
+        this.password = password;
+        this.birthDate = birthDate;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Data
 @Entity
 public class TaskEntity {
@@ -24,4 +23,7 @@ public class TaskEntity {
     @JoinColumn(name = "id_task")
     private TaskCategoryEntity category;
 
+    public TaskEntity(TaskEntity taskEntity) {
+
+    }
 }

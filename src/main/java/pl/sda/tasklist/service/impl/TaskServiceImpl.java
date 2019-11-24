@@ -23,12 +23,12 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskDto getTaskById(Long id) {
         return taskRepository.findById(id)
-                .map(ModelMapper::mapTaskEntityToTaskDto).get();
+                .map(ModelMapper::map).get();
     }
 
     @Override
     public void addTask(CreateTaskForm form) {
-        TaskDto taskDto = ModelMapper.mapFormToTaskDto(form);
+        TaskDto taskDto = ModelMapper.map(form);
         TaskEntity taskEntity = new TaskEntity();
         taskEntity.setName(taskDto.getName());
         taskEntity.setDescription(taskDto.getDescription());
@@ -38,23 +38,27 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(taskEntity);
     }
 
-    //task dto
-    @Override
-    public void deleteTaskById(Long id) {
-        Optional<TaskEntity> taskById = taskRepository.findById(id);
-        taskRepository.delete(taskById);
-
-    }
-
     @Override
     public List<TaskDto> getTasks() {
         List<TaskDto> listOfTaskDto = taskRepository
                 .findAll()
                 .stream()
-                .map(ModelMapper::mapTaskEntityToTaskDto)
+                .map(ModelMapper::map)
                 .collect(Collectors.toList());
         return listOfTaskDto;
     }
 
+    //task dto
+//    @Override
+//    public void deleteTaskById(Long id) {
+//        Optional<TaskEntity> taskById = taskRepository.findById(id);
+//        TaskEntity taskEntity = null;
+//        if (taskById.isPresent()) {
+//            taskEntity = new TaskEntity(taskById.get());
+//        }
+//        taskRepository.delete(taskEntity);
+//
+//    }
+//
+    }
 
-}

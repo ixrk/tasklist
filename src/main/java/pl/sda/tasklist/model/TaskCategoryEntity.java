@@ -20,4 +20,8 @@ public class TaskCategoryEntity {
 
     @OneToMany(mappedBy = "category")
     private List<TaskEntity> tasks;
+
+    @ManyToOne
+    @JoinColumn(name = "id_task_category")
+    private UserEntity user;
 }

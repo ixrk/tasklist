@@ -19,6 +19,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
             {"/user/**", "/new-category", "/delete-category", "/new-task", "/delete-task", "/log-out"};
     private static final String[] ADMIN_MATCHERS = {"/admin/**"};
     private static final String[] GLOBAL_MATCHERS = {"/sign-up","/","/sign-in","/home"};
+    private final UserDetailsService userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -39,5 +40,15 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.headers()
                 .frameOptions()
                 .sameOrigin();
+    }
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
+    void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 }

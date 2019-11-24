@@ -28,9 +28,10 @@ public class UserEntity {
     @ManyToMany
     private Set<UserRoleEntity> roles = new HashSet<>();
 
-    public UserEntity(String userName, String password, LocalDate birthDate) {
-        this.userName = userName;
-        this.password = password;
-        this.birthDate = birthDate;
-    }
+    @OneToMany
+    @JoinColumn(name = "id_user")
+
+    private List<TaskCategoryEntity> categories = new ArrayList<>();
+
+
 }

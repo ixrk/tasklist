@@ -2,6 +2,7 @@ package pl.sda.tasklist.mock;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.sda.tasklist.dao.UserRepository;
 import pl.sda.tasklist.dao.UserRoleRepository;
 import pl.sda.tasklist.dto.SignInForm;
 import pl.sda.tasklist.dto.SignUpForm;
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 @Service
 public class Mocker {
 
+    private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
     private final SignUpService signUpService;
     private final TaskCategoryService taskCategoryService;
@@ -34,6 +36,11 @@ public class Mocker {
     @PostConstruct
     public void mockUser() throws UserExistsException {
         final String username = "user1";
+
+        if (userRepository.existsByUserName(username)) {
+            return;
+        }
+
         SignUpForm signUpForm = new SignUpForm();
         signUpForm.setUserName(username);
         signUpForm.setBirthDate(LocalDate.now());

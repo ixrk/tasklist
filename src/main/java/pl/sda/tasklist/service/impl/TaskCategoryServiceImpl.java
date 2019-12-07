@@ -13,10 +13,12 @@ import pl.sda.tasklist.model.TaskCategoryEntity;
 import pl.sda.tasklist.model.UserEntity;
 import pl.sda.tasklist.service.TaskCategoryService;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class TaskCategoryServiceImpl implements TaskCategoryService {

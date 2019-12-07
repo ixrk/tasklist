@@ -9,4 +9,5 @@ public interface TaskCategoryService {
 
     List<TaskCategoryDto> getAllTaskCategoriesByUser(String user);
     void addTaskCategoryForUser(String user, TaskCategoryForm form);
+    void deleteTaskCategory(Long taskCategoryId);
 }

@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public void saveUser(SignUpForm signUpForm) throws UserExistsException {
+    public void saveUser(SignUpForm signUpForm, String roleAuthority) throws UserExistsException {
         if (userRepository.existsByUserName(signUpForm.getUserName())) {
             throw new UserExistsException("User with name " + signUpForm.getUserName() + " already exists!");
         }
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
         String encodedPassword = passwordEncoder.encode(signUpForm.getPassword());
         UserEntity userEntity = new UserEntity(signUpForm.getUserName(), encodedPassword, signUpForm.getBirthDate());
 
-        UserRoleEntity userRole = userRoleRepository.findByName("ROLE_USER");
+        UserRoleEntity userRole = userRoleRepository.findByName(roleAuthority);
         userEntity.getRoles().add(userRole);
 
         userRepository.save(userEntity);

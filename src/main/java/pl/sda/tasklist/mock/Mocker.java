@@ -1,6 +1,7 @@
 package pl.sda.tasklist.mock;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import pl.sda.tasklist.dao.UserRepository;
 import pl.sda.tasklist.dto.SignUpForm;
@@ -32,7 +33,7 @@ public class Mocker {
         signUpForm.setUserName(username);
         signUpForm.setBirthDate(LocalDate.now());
         signUpForm.setPassword("Password1");
-        userService.saveUser(signUpForm);
+        userService.saveUser(signUpForm, "ROLE_USER");
 
         TaskCategoryForm taskCategoryForm1 = new TaskCategoryForm();
         taskCategoryForm1.setName("Shopping list");
@@ -43,5 +44,20 @@ public class Mocker {
         taskCategoryForm2.setName("Work checklist");
         taskCategoryForm2.setDescription("Things to do before leaving");
         taskCategoryService.addTaskCategoryForUser(username, taskCategoryForm2);
+    }
+
+    @PostConstruct
+    public void mockAdmin() throws UserExistsException {
+        final String username = "admin1";
+
+        if (userRepository.existsByUserName(username)) {
+            return;
+        }
+
+        SignUpForm signUpForm = new SignUpForm();
+        signUpForm.setUserName(username);
+        signUpForm.setBirthDate(LocalDate.now());
+        signUpForm.setPassword("Password1");
+        userService.saveUser(signUpForm, "ROLE_ADMIN");
     }
 }

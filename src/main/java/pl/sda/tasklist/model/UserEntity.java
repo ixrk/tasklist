@@ -34,10 +34,6 @@ public class UserEntity {
     @ManyToMany
     private Set<UserRoleEntity> roles = new HashSet<>();
 
-    @OneToMany
-    @JoinColumn(name = "id_user")
-
-    private List<TaskCategoryEntity> categories = new ArrayList<>();
-
-
+//    @OneToMany(mappedBy = "user")
+//    private List<TaskCategoryEntity> categories = new ArrayList<>();
 }

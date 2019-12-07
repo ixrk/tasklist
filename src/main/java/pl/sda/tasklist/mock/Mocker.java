@@ -3,12 +3,9 @@ package pl.sda.tasklist.mock;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.sda.tasklist.dao.UserRepository;
-import pl.sda.tasklist.dao.UserRoleRepository;
-import pl.sda.tasklist.dto.SignInForm;
 import pl.sda.tasklist.dto.SignUpForm;
 import pl.sda.tasklist.dto.TaskCategoryForm;
 import pl.sda.tasklist.exception.UserExistsException;
-import pl.sda.tasklist.model.UserRoleEntity;
 import pl.sda.tasklist.service.SignUpService;
 import pl.sda.tasklist.service.TaskCategoryService;
 
@@ -20,18 +17,8 @@ import java.time.LocalDate;
 public class Mocker {
 
     private final UserRepository userRepository;
-    private final UserRoleRepository userRoleRepository;
     private final SignUpService signUpService;
     private final TaskCategoryService taskCategoryService;
-
-    @PostConstruct
-    public void populateRoles() {
-        UserRoleEntity ordinaryUserRole = new UserRoleEntity("ROLE_USER");
-        userRoleRepository.save(ordinaryUserRole);
-
-        UserRoleEntity adminUserRole = new UserRoleEntity("ROLE_ADMIN");
-        userRoleRepository.save(adminUserRole);
-    }
 
     @PostConstruct
     public void mockUser() throws UserExistsException {

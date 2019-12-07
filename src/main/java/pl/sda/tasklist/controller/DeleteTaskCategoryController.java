@@ -17,5 +17,6 @@ public class DeleteTaskCategoryController {
     @PostMapping
     String deleteTaskCategory(@ModelAttribute Long taskCategoryId) {
         taskCategoryService.deleteTaskCategory(taskCategoryId);
+        return "redirect:/";
     }
 }

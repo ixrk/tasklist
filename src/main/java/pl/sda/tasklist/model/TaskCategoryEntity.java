@@ -22,6 +22,6 @@ public class TaskCategoryEntity {
     private List<TaskEntity> tasks;
 
     @ManyToOne
-    @JoinColumn(name = "id_task_category")
+    @JoinColumn(name = "id_user")
     private UserEntity user;
 }

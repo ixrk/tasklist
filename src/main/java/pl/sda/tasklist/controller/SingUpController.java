@@ -16,7 +16,7 @@ import pl.sda.tasklist.service.impl.UserServiceImpl;
 @RequestMapping("/sign-up")
 public class SingUpController {
 
-    private final UserServiceImpl signUpService;
+    private final UserServiceImpl userService;
     private final Validator validator;
 
     @InitBinder
@@ -24,8 +24,8 @@ public class SingUpController {
         binder.setValidator(validator);
     }
 
-    public SingUpController(UserServiceImpl signUpService, @Qualifier("signUpValidator")Validator validator) {
-        this.signUpService = signUpService;
+    public SingUpController(UserServiceImpl userService, @Qualifier("signUpValidator")Validator validator) {
+        this.userService = userService;
         this.validator = validator;
     }
 
@@ -42,7 +42,7 @@ public class SingUpController {
             return "signUp";
         }
 
-        signUpService.saveUser(form, "ROLE_USER");
+        userService.saveUser(form, "ROLE_USER");
 
         return "redirect:/sign-in";
     }

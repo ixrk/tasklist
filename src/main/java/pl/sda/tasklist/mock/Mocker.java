@@ -6,7 +6,7 @@ import pl.sda.tasklist.dao.UserRepository;
 import pl.sda.tasklist.dto.SignUpForm;
 import pl.sda.tasklist.dto.TaskCategoryForm;
 import pl.sda.tasklist.exception.UserExistsException;
-import pl.sda.tasklist.service.SignUpService;
+import pl.sda.tasklist.service.UserService;
 import pl.sda.tasklist.service.TaskCategoryService;
 
 import javax.annotation.PostConstruct;
@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public class Mocker {
 
     private final UserRepository userRepository;
-    private final SignUpService signUpService;
+    private final UserService userService;
     private final TaskCategoryService taskCategoryService;
 
     @PostConstruct
@@ -32,7 +32,7 @@ public class Mocker {
         signUpForm.setUserName(username);
         signUpForm.setBirthDate(LocalDate.now());
         signUpForm.setPassword("Password1");
-        signUpService.saveUser(signUpForm);
+        userService.saveUser(signUpForm);
 
         TaskCategoryForm taskCategoryForm1 = new TaskCategoryForm();
         taskCategoryForm1.setName("Shopping list");

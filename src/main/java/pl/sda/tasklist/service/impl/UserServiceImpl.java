@@ -9,20 +9,20 @@ import pl.sda.tasklist.dto.SignUpForm;
 import pl.sda.tasklist.exception.UserExistsException;
 import pl.sda.tasklist.model.UserEntity;
 import pl.sda.tasklist.model.UserRoleEntity;
-import pl.sda.tasklist.service.SignUpService;
+import pl.sda.tasklist.service.UserService;
 
 import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class SignUpServiceImpl implements SignUpService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public SignUpServiceImpl(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
         this.passwordEncoder = passwordEncoder;

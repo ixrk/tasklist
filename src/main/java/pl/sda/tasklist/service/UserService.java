@@ -5,7 +5,7 @@ import pl.sda.tasklist.dto.SignUpForm;
 import pl.sda.tasklist.exception.UserExistsException;
 
 @Service
-public interface SignUpService {
+public interface UserService {
     void saveUser(SignUpForm signUpForm) throws UserExistsException;
 
 }

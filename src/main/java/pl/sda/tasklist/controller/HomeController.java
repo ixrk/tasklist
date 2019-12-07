@@ -24,6 +24,7 @@ public class HomeController {
         } else {
             modelAndView = new ModelAndView("index-logged-in");
             modelAndView.addObject("taskCategories", taskCategoryService.getAllTaskCategoriesByUser(principal.getName()));
+            modelAndView.addObject("username", principal.getName());
         }
         return modelAndView;
     }

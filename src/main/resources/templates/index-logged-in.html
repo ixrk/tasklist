@@ -12,6 +12,7 @@
 
  <div class="container">
      <h2>Categories</h2>
+     <a class="btn btn-primary" href="@{/new-category}" role="button">New Category</a>
 
     <div th:each="category : ${taskCategories}" class="list-group">
         <a th:href="@{/{user}/{category}(user=${username},category=${category.urlName})}" class="list-group-item list-group-item-action">

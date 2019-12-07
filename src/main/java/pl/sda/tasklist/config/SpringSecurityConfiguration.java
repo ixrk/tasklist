@@ -21,7 +21,6 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
             {"/user/**", "/new-category", "/delete-category", "/new-task", "/delete-task", "/log-out"};
     private static final String[] ADMIN_MATCHERS = {"/admin/**"};
     private static final String[] GLOBAL_MATCHERS = {"/sign-up", "/", "/sign-in", "/home"};
-    private final UserDetailsService userDetailsService;
     private final DataSource dataSource;
 
     @Override

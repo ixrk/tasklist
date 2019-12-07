@@ -43,4 +43,9 @@ public class TaskCategoryServiceImpl implements TaskCategoryService {
         taskCategoryEntity.setUser(userEntity);
         taskCategoryRepository.save(taskCategoryEntity);
     }
+
+    @Override
+    public void deleteTaskCategory(Long taskCategoryId) {
+        taskCategoryRepository.deleteById(taskCategoryId);
+    }
 }

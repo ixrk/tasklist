@@ -1,5 +1,6 @@
 package pl.sda.tasklist.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,10 @@ import pl.sda.tasklist.model.UserRoleEntity;
 import pl.sda.tasklist.service.UserService;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -21,15 +25,8 @@ public class UserServiceImpl implements UserService {
     private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.userRoleRepository = userRoleRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
-
     @Override
-    public void saveUser(SignUpForm signUpForm) throws UserExistsException {
+    public void saveUser(SignUpForm signUpForm, String roleAuthority) throws UserExistsException {
         if (userRepository.existsByUserName(signUpForm.getUserName())) {
             throw new UserExistsException("User with name " + signUpForm.getUserName() + " already exists!");
         }
@@ -37,9 +34,16 @@ public class UserServiceImpl implements UserService {
         String encodedPassword = passwordEncoder.encode(signUpForm.getPassword());
         UserEntity userEntity = new UserEntity(signUpForm.getUserName(), encodedPassword, signUpForm.getBirthDate());
 
-        UserRoleEntity userRole = userRoleRepository.findByName("ROLE_USER");
+        UserRoleEntity userRole = userRoleRepository.findByName(roleAuthority);
         userEntity.getRoles().add(userRole);
 
         userRepository.save(userEntity);
+    }
+
+    @Override
+    public List<String> getAllUsernames() {
+        return userRepository.findAll().stream()
+                .map(UserEntity::getUserName)
+                .collect(Collectors.toList());
     }
 }

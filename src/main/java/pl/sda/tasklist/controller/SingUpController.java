@@ -42,7 +42,7 @@ public class SingUpController {
             return "signUp";
         }
 
-        userService.saveUser(form);
+        userService.saveUser(form, "ROLE_USER");
 
         return "redirect:/sign-in";
     }

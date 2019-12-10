@@ -1,13 +1,46 @@
 package pl.sda.tasklist.service;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import pl.sda.tasklist.dao.TaskCategoryRepository;
+import pl.sda.tasklist.dao.UserRepository;
 import pl.sda.tasklist.dto.TaskCategoryDto;
 import pl.sda.tasklist.dto.TaskCategoryForm;
+import pl.sda.tasklist.exception.UserNotExistsException;
+import pl.sda.tasklist.mapper.ModelMapper;
+import pl.sda.tasklist.model.TaskCategoryEntity;
+import pl.sda.tasklist.model.UserEntity;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public interface TaskCategoryService {
+@Transactional
+@RequiredArgsConstructor
+@Service
+public class TaskCategoryService {
+    private final TaskCategoryRepository taskCategoryRepository;
+    private final UserRepository userRepository;
 
-    List<TaskCategoryDto> getAllTaskCategoriesByUser(String user);
-    void addTaskCategoryForUser(String user, TaskCategoryForm form);
-    void deleteTaskCategory(Long taskCategoryId);
+    public List<TaskCategoryDto> getAllTaskCategoriesByUser(String user) {
+        List<TaskCategoryEntity> taskCategoryEntities = taskCategoryRepository.findAllByUser_UserName(user);
+        return taskCategoryEntities.stream()
+                .map(ModelMapper::map)
+                .collect(Collectors.toList());
+    }
+
+    public void addTaskCategoryForUser(String user, TaskCategoryForm form) {
+        TaskCategoryEntity taskCategoryEntity = new TaskCategoryEntity();
+        taskCategoryEntity.setName(form.getName());
+        taskCategoryEntity.setDescription(form.getDescription());
+        taskCategoryEntity.setTasks(new ArrayList<>());
+        UserEntity userEntity = userRepository.findByUserName(user).orElseThrow(() -> new UserNotExistsException(user + "- user does not exist"));
+        taskCategoryEntity.setUser(userEntity);
+        taskCategoryRepository.save(taskCategoryEntity);
+    }
+
+    public void deleteTaskCategory(Long taskCategoryId) {
+        taskCategoryRepository.deleteById(taskCategoryId);
+    }
 }

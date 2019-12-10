@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pl.sda.tasklist.dto.TaskCategoryForm;
-import pl.sda.tasklist.model.TaskCategoryEntity;
+import pl.sda.tasklist.exception.UserNotFoundException;
 import pl.sda.tasklist.service.TaskCategoryService;
 
 import java.security.Principal;
@@ -27,7 +27,7 @@ public class NewTaskCategoryController {
     }
 
     @PostMapping
-    String addTaskCategory(Principal principal, @ModelAttribute TaskCategoryForm taskCategoryForm) {
+    String addTaskCategory(Principal principal, @ModelAttribute TaskCategoryForm taskCategoryForm) throws UserNotFoundException {
         taskCategoryService.addTaskCategoryForUser(principal.getName(), taskCategoryForm);
         return "redirect:/";
     }

@@ -16,6 +16,7 @@ public class TaskCategoryEntity {
     private Long id;
 
     private String name;
+    private String urlName;
     private String description;
 
     @OneToMany(mappedBy = "category")

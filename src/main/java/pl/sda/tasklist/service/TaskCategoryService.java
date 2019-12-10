@@ -23,7 +23,11 @@ public class TaskCategoryService {
     private final TaskCategoryRepository taskCategoryRepository;
     private final UserRepository userRepository;
 
-    public List<TaskCategoryDto> getAllTaskCategoriesByUser(String user) {
+    public List<TaskCategoryDto> getAllTaskCategoriesByUser(String user) throws UserNotFoundException {
+        if (!userRepository.existsByUserName(user)) {
+            throw new UserNotFoundException(user);
+        }
+
         List<TaskCategoryEntity> taskCategoryEntities = taskCategoryRepository.findAllByUser_UserName(user);
         return taskCategoryEntities.stream()
                 .map(ModelMapper::map)

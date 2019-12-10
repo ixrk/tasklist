@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import pl.sda.tasklist.exception.UserNotFoundException;
 import pl.sda.tasklist.service.TaskCategoryService;
 
 import java.security.Principal;
@@ -17,7 +18,7 @@ public class HomeController {
     private final TaskCategoryService taskCategoryService;
 
     @GetMapping("/")
-    ModelAndView getIndex(Principal principal) {
+    ModelAndView getIndex(Principal principal) throws UserNotFoundException {
         ModelAndView modelAndView;
         if (principal == null) {
             modelAndView = new ModelAndView("index-anonymous");

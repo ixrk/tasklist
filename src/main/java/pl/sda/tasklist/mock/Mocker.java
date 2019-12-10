@@ -7,6 +7,7 @@ import pl.sda.tasklist.dao.UserRepository;
 import pl.sda.tasklist.dto.SignUpForm;
 import pl.sda.tasklist.dto.TaskCategoryForm;
 import pl.sda.tasklist.exception.UserExistsException;
+import pl.sda.tasklist.exception.UserNotFoundException;
 import pl.sda.tasklist.service.UserService;
 import pl.sda.tasklist.service.TaskCategoryService;
 
@@ -22,7 +23,7 @@ public class Mocker {
     private final TaskCategoryService taskCategoryService;
 
     @PostConstruct
-    public void mockUser() throws UserExistsException {
+    public void mockUser() throws UserExistsException, UserNotFoundException {
         final String username = "user1";
 
         if (userRepository.existsByUserName(username)) {

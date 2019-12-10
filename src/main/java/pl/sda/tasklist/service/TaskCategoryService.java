@@ -33,6 +33,7 @@ public class TaskCategoryService {
     public void addTaskCategoryForUser(String user, TaskCategoryForm form) {
         TaskCategoryEntity taskCategoryEntity = new TaskCategoryEntity();
         taskCategoryEntity.setName(form.getName());
+        taskCategoryEntity.setUrlName(form.getName().replace(" ", "-"));
         taskCategoryEntity.setDescription(form.getDescription());
         taskCategoryEntity.setTasks(new ArrayList<>());
         UserEntity userEntity = userRepository.findByUserName(user).orElseThrow(() -> new UserNotExistsException(user + "- user does not exist"));
@@ -40,7 +41,7 @@ public class TaskCategoryService {
         taskCategoryRepository.save(taskCategoryEntity);
     }
 
-    public void deleteTaskCategory(Long taskCategoryId) {
-        taskCategoryRepository.deleteById(taskCategoryId);
+    public void deleteTaskCategory(String urlName) {
+        taskCategoryRepository.deleteByUrlName(urlName);
     }
 }

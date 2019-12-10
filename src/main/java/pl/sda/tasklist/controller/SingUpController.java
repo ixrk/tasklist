@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.sda.tasklist.dto.SignUpForm;
 import pl.sda.tasklist.exception.UserExistsException;
-import pl.sda.tasklist.service.impl.UserServiceImpl;
+import pl.sda.tasklist.service.UserService;
 
 @Controller
 @RequestMapping("/sign-up")
 public class SingUpController {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
     private final Validator validator;
 
     @InitBinder
@@ -24,7 +24,7 @@ public class SingUpController {
         binder.setValidator(validator);
     }
 
-    public SingUpController(UserServiceImpl userService, @Qualifier("signUpValidator")Validator validator) {
+    public SingUpController(UserService userService, @Qualifier("signUpValidator")Validator validator) {
         this.userService = userService;
         this.validator = validator;
     }

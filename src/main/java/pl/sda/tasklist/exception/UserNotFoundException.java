@@ -7,7 +7,7 @@ public class UserNotFoundException extends Exception {
     private final String username;
 
     public UserNotFoundException(String username) {
-        super(username + "- user not found");
+        super(username + " - user not found");
         this.username = username;
     }
 }

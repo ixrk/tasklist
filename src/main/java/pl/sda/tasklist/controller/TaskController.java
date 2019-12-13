@@ -17,7 +17,7 @@ import pl.sda.tasklist.service.TaskService;
 public class TaskController {
 
     TaskService taskService;
-
+    ModelMapper modelMapper;
 
     @GetMapping("/task-list")
     ModelAndView getTaskPage() {
@@ -31,7 +31,7 @@ public class TaskController {
     ModelAndView editTask(@ModelAttribute CreateTaskForm form) {
         ModelAndView mnv = new ModelAndView("tasks");
         mnv.addObject("createFormTask", new CreateTaskForm());
-        TaskDto taskDto = ModelMapper.map(form);
+        TaskDto taskDto = modelMapper.map(form);
         taskService.addTask(form);
         return mnv;
     }

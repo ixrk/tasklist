@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 public class TaskCategoryService {
     private final TaskCategoryRepository taskCategoryRepository;
     private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
 
     public List<TaskCategoryDto> getAllTaskCategoriesByUser(String user) throws UserNotFoundException {
         if (!userRepository.existsByUserName(user)) {
@@ -30,7 +31,7 @@ public class TaskCategoryService {
 
         List<TaskCategoryEntity> taskCategoryEntities = taskCategoryRepository.findAllByUser_UserName(user);
         return taskCategoryEntities.stream()
-                .map(ModelMapper::map)
+                .map(modelMapper::map)
                 .collect(Collectors.toList());
     }
 

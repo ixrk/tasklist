@@ -16,15 +16,16 @@ import java.util.stream.Collectors;
 public class TaskService {
 
     private final TaskRepository taskRepository;
+    private final ModelMapper modelMapper;
 
     //task dto
     public TaskDto getTaskById(Long id) {
         return taskRepository.findById(id)
-                .map(ModelMapper::map).get();
+                .map(modelMapper::map).get();
     }
 
     public void addTask(CreateTaskForm form) {
-        TaskDto taskDto = ModelMapper.map(form);
+        TaskDto taskDto = modelMapper.map(form);
         TaskEntity taskEntity = new TaskEntity();
         taskEntity.setName(taskDto.getName());
         taskEntity.setDescription(taskDto.getDescription());
@@ -38,7 +39,7 @@ public class TaskService {
         return taskRepository
                 .findAll()
                 .stream()
-                .map(ModelMapper::map)
+                .map(modelMapper::map)
                 .collect(Collectors.toList());
     }
 

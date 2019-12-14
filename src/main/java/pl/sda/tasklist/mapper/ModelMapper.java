@@ -41,8 +41,10 @@ public class ModelMapper {
         return dto;
     }
 
-    public TaskEntity map(TaskDto dto) {
+    public TaskEntity map(TaskDto dto, TaskEntity baseEntity) {
         TaskEntity entity = new TaskEntity();
+        entity.setId(baseEntity.getId());
+
         entity.setUuid(dto.getUuid());
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());

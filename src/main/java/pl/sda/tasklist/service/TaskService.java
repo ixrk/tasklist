@@ -6,10 +6,12 @@ import pl.sda.tasklist.dao.TaskCategoryRepository;
 import pl.sda.tasklist.dao.TaskRepository;
 import pl.sda.tasklist.dto.CreateTaskForm;
 import pl.sda.tasklist.dto.TaskDto;
+import pl.sda.tasklist.exception.TaskNotFoundException;
 import pl.sda.tasklist.mapper.ModelMapper;
 import pl.sda.tasklist.model.TaskEntity;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -29,8 +31,10 @@ public class TaskService {
         taskRepository.save(taskEntity);
     }
 
-    public void editTask(Long uuid) {
-
+    public void editTask(TaskDto dto) throws TaskNotFoundException {
+        TaskEntity entity = taskRepository.findByUuid(dto.getUuid()).orElseThrow(() -> new TaskNotFoundException(dto.getUuid()));
+        TaskEntity modifiedEntity = modelMapper.map(dto, entity);
+        taskRepository.save(modifiedEntity);
     }
 }
 

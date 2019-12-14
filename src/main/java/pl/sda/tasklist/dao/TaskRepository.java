@@ -6,5 +6,5 @@ import pl.sda.tasklist.model.TaskEntity;
 import java.util.Optional;
 
 public interface TaskRepository extends JpaRepository<TaskEntity, Long> {
-//    void delete(Optional<TaskEntity> byId);
+    Optional<TaskEntity> findByUuid(long uuid);
 }

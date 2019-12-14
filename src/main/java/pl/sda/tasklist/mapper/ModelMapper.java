@@ -26,6 +26,7 @@ public class ModelMapper {
         entity.setName(form.getName());
         entity.setDescription(form.getDescription());
         entity.setPriority(form.getPriority());
+        return entity;
     }
 
     public TaskDto map(TaskEntity entity) {
@@ -47,6 +48,7 @@ public class ModelMapper {
         entity.setDone(dto.isDone());
         entity.setPriority(dto.getPriority());
         entity.setCategory(taskCategoryRepository.findByUrlName(dto.getCategory().getUrlName()).get());
+        return entity;
     }
 
     public TaskCategoryDto map(TaskCategoryEntity categoryEntity) {

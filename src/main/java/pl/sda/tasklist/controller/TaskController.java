@@ -21,33 +21,17 @@ public class TaskController {
 
     @GetMapping("/task-list")
     ModelAndView getTaskPage() {
-        ModelAndView mvn = new ModelAndView("tasks");
-        mvn.addObject("tasks", taskService.getTasks());
-        return new ModelAndView("tasks");
+        return null;
     }
 
 
     @PostMapping("/edit-task")
     ModelAndView editTask(@ModelAttribute CreateTaskForm form) {
-        ModelAndView mnv = new ModelAndView("tasks");
-        mnv.addObject("createFormTask", new CreateTaskForm());
-        TaskDto taskDto = modelMapper.map(form);
-        taskService.addTask(form);
-        return mnv;
+        return null;
     }
 
     @PostMapping("/new-task")
     ModelAndView newTask(@ModelAttribute CreateTaskForm form) {
-        ModelAndView mnv = new ModelAndView("redirect:/tasklist");
-        taskService.addTask(form);
-        return mnv;
+        return null;
     }
-
-//    @PostMapping("/delete-task/{id}")
-//    String removeTask(@PathVariable long idProduct) {
-//        taskService.deleteTaskById(idProduct);
-//        return "redirect:/tasks";
-//    }
-
-
 }

@@ -20,8 +20,4 @@ public class TaskEntity {
     @ManyToOne
     @JoinColumn(name = "id_task")
     private TaskCategoryEntity category;
-
-    public TaskEntity(TaskEntity taskEntity) {
-
-    }
 }

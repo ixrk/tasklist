@@ -2,6 +2,7 @@ package pl.sda.tasklist.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.sda.tasklist.dao.TaskCategoryRepository;
 import pl.sda.tasklist.dao.TaskRepository;
 import pl.sda.tasklist.dto.CreateTaskForm;
 import pl.sda.tasklist.dto.TaskDto;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class TaskService {
 
+    private final TaskCategoryRepository taskCategoryRepository;
     private final TaskRepository taskRepository;
     private final ModelMapper modelMapper;
 
@@ -24,14 +26,13 @@ public class TaskService {
                 .map(modelMapper::map).get();
     }
 
-    public void addTask(CreateTaskForm form) {
-        TaskDto taskDto = modelMapper.map(form);
+    public void addTask(CreateTaskForm form, String categoryUrl) {
         TaskEntity taskEntity = new TaskEntity();
-        taskEntity.setName(taskDto.getName());
-        taskEntity.setDescription(taskDto.getDescription());
-        taskEntity.setDone(taskDto.isDone());
-        taskEntity.setPriority(taskDto.getPriority());
-        taskEntity.setCategory(taskDto.getCategory());
+        taskEntity.setName(form.getName());
+        taskEntity.setDescription(form.getDescription());
+        taskEntity.setDone(false);
+        taskEntity.setPriority(form.getPriority());
+        taskEntity.setCategory(taskCategoryRepository.findByUrlName(categoryUrl).get());
         taskRepository.save(taskEntity);
     }
 

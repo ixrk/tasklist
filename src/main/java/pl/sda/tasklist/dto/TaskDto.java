@@ -7,17 +7,14 @@ import lombok.NoArgsConstructor;
 import pl.sda.tasklist.model.Priority;
 import pl.sda.tasklist.model.TaskCategoryEntity;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 public class TaskDto {
 
-    private String uuid;
+    private long uuid;
+    private String uuidHex;
     private String name;
     private String description;
     private boolean isDone;
     private Priority priority;
-    private TaskCategoryEntity category;
-
-
+    private TaskCategoryDto category;
 }

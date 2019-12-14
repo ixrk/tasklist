@@ -7,12 +7,9 @@ import pl.sda.tasklist.model.Priority;
 import pl.sda.tasklist.model.TaskCategoryEntity;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class CreateTaskForm {
     private String name;
     private String description;
-    private boolean isDone;
     private Priority priority;
-    private TaskCategoryEntity category;
+    private String categoryUrl;
 }

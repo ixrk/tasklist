@@ -4,8 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 @Entity
 public class TaskEntity {
@@ -13,7 +11,7 @@ public class TaskEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String uuid;
+    private long uuid;
     private String name;
     private String description;
     private boolean isDone;
@@ -22,8 +20,4 @@ public class TaskEntity {
     @ManyToOne
     @JoinColumn(name = "id_task")
     private TaskCategoryEntity category;
-
-    public TaskEntity(TaskEntity taskEntity) {
-
-    }
 }

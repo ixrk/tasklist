@@ -21,11 +21,8 @@ public class TaskService {
     private final ModelMapper modelMapper;
 
     public void addTask(CreateTaskForm form, String categoryUrl) {
-        TaskEntity taskEntity = new TaskEntity();
-        taskEntity.setName(form.getName());
-        taskEntity.setDescription(form.getDescription());
+        TaskEntity taskEntity = modelMapper.map(form);
         taskEntity.setDone(false);
-        taskEntity.setPriority(form.getPriority());
         taskEntity.setCategory(taskCategoryRepository.findByUrlName(categoryUrl).get());
         taskRepository.save(taskEntity);
     }

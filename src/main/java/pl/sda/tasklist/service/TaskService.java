@@ -26,6 +26,9 @@ public class TaskService {
     public void addTask(CreateTaskForm form, String categoryUrl) {
         TaskEntity taskEntity = modelMapper.map(form);
         taskEntity.setUuid(UUID.randomUUID().getMostSignificantBits());
+        while (taskRepository.existsByUuid(taskEntity.getUuid())) {
+            taskEntity.setUuid(taskEntity.getUuid() + 1);
+        }
         taskEntity.setDone(false);
         taskEntity.setCategory(taskCategoryRepository.findByUrlName(categoryUrl).get());
         taskRepository.save(taskEntity);

@@ -10,7 +10,8 @@ import pl.sda.tasklist.model.TaskCategoryEntity;
 @Data
 public class TaskDto {
 
-    private String uuid;
+    private long uuid;
+    private String uuidHex;
     private String name;
     private String description;
     private boolean isDone;

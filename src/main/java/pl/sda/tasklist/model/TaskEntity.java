@@ -11,7 +11,7 @@ public class TaskEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String uuid;
+    private long uuid;
     private String name;
     private String description;
     private boolean isDone;

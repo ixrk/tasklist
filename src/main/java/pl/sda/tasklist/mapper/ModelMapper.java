@@ -32,6 +32,7 @@ public class ModelMapper {
     public TaskDto map(TaskEntity entity) {
         TaskDto dto = new TaskDto();
         dto.setUuid(entity.getUuid());
+        dto.setUuidHex(Long.toHexString(entity.getUuid()));
         dto.setName(entity.getName());
         dto.setDescription(entity.getDescription());
         dto.setDone(entity.isDone());

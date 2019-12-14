@@ -10,6 +10,7 @@ import pl.sda.tasklist.mapper.ModelMapper;
 import pl.sda.tasklist.model.TaskEntity;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -22,9 +23,14 @@ public class TaskService {
 
     public void addTask(CreateTaskForm form, String categoryUrl) {
         TaskEntity taskEntity = modelMapper.map(form);
+        taskEntity.setUuid(UUID.randomUUID().getMostSignificantBits());
         taskEntity.setDone(false);
         taskEntity.setCategory(taskCategoryRepository.findByUrlName(categoryUrl).get());
         taskRepository.save(taskEntity);
+    }
+
+    public void editTask(Long uuid) {
+
     }
 }
 

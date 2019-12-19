@@ -41,7 +41,7 @@ public class ModelMapper {
         return dto;
     }
 
-    public TaskEntity map(TaskDto dto, TaskEntity baseEntity) {
+    public TaskEntity map(TaskDto dto, TaskEntity baseEntity, String username) {
         TaskEntity entity = new TaskEntity();
         entity.setId(baseEntity.getId());
 
@@ -50,7 +50,7 @@ public class ModelMapper {
         entity.setDescription(dto.getDescription());
         entity.setDone(dto.isDone());
         entity.setPriority(dto.getPriority());
-        entity.setCategory(taskCategoryRepository.findByUrlName(dto.getCategory().getUrlName()).get());
+        entity.setCategory(taskCategoryRepository.findByUrlNameAndUser_UserName(dto.getCategory().getUrlName(), username).get());
         return entity;
     }
 

@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface TaskCategoryRepository extends JpaRepository<TaskCategoryEntity, Long> {
     List<TaskCategoryEntity> findAllByUser_UserName(String username);
-    Optional<TaskCategoryEntity> findByUrlName(String urlName);
-    boolean existsByUrlName(String urlName);
-    void deleteByUrlName(String urlName);
+    Optional<TaskCategoryEntity> findByUrlNameAndUser_UserName(String urlName, String username);
+    boolean existsByUrlNameAndUser_UserName(String urlName, String username);
+    void deleteByUrlNameAndUser_UserName(String urlName, String username);
 }

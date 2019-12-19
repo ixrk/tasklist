@@ -6,6 +6,7 @@ import pl.sda.tasklist.dao.TaskCategoryRepository;
 import pl.sda.tasklist.dao.UserRepository;
 import pl.sda.tasklist.dto.TaskCategoryDto;
 import pl.sda.tasklist.dto.TaskCategoryForm;
+import pl.sda.tasklist.exception.TaskCategoryNotFoundException;
 import pl.sda.tasklist.exception.UserNotFoundException;
 import pl.sda.tasklist.mapper.ModelMapper;
 import pl.sda.tasklist.model.TaskCategoryEntity;
@@ -23,6 +24,11 @@ public class TaskCategoryService {
     private final TaskCategoryRepository taskCategoryRepository;
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+
+    public TaskCategoryDto getCategoryByUrlNameAndUsername(String urlName, String username) throws TaskCategoryNotFoundException {
+        TaskCategoryEntity entity = taskCategoryRepository.findByUrlNameAndUser_UserName(urlName, username).orElseThrow(() -> new TaskCategoryNotFoundException(urlName));
+        return modelMapper.map(entity);
+    }
 
     public List<TaskCategoryDto> getAllTaskCategoriesByUser(String user) throws UserNotFoundException {
         if (!userRepository.existsByUserName(user)) {
@@ -46,7 +52,7 @@ public class TaskCategoryService {
         taskCategoryRepository.save(taskCategoryEntity);
     }
 
-    public void deleteTaskCategory(String urlName) {
-        taskCategoryRepository.deleteByUrlName(urlName);
+    public void deleteTaskCategory(String username, String urlName) {
+        taskCategoryRepository.deleteByUrlNameAndUser_UserName(username, urlName);
     }
 }

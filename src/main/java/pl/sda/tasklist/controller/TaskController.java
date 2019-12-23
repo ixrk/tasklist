@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import pl.sda.tasklist.dto.CreateTaskForm;
 import pl.sda.tasklist.dto.TaskCategoryDto;
 import pl.sda.tasklist.exception.TaskCategoryNotFoundException;
+import pl.sda.tasklist.model.Priority;
 import pl.sda.tasklist.service.TaskCategoryService;
 import pl.sda.tasklist.service.TaskService;
 
@@ -44,9 +45,12 @@ public class TaskController {
     }
 
     @GetMapping("/{user}/{categoryUrl}/add-task")
-    ModelAndView getNewTaskPage() {
+    ModelAndView getNewTaskPage(@PathVariable String user, @PathVariable String categoryUrl) {
         ModelAndView modelAndView = new ModelAndView("task-form");
-        modelAndView.addObject("form", new CreateTaskForm());
+        modelAndView.addObject("taskForm", new CreateTaskForm());
+        modelAndView.addObject("priorities", Priority.values());
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("categoryUrl", categoryUrl);
 
         return modelAndView;
     }

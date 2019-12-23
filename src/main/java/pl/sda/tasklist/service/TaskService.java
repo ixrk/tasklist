@@ -23,20 +23,20 @@ public class TaskService {
     private final TaskRepository taskRepository;
     private final ModelMapper modelMapper;
 
-    public void addTask(CreateTaskForm form, String categoryUrl) {
+    public void addTask(CreateTaskForm form, String categoryUrl, String username) {
         TaskEntity taskEntity = modelMapper.map(form);
         taskEntity.setUuid(UUID.randomUUID().getMostSignificantBits());
         while (taskRepository.existsByUuid(taskEntity.getUuid())) {
             taskEntity.setUuid(taskEntity.getUuid() + 1);
         }
         taskEntity.setDone(false);
-        taskEntity.setCategory(taskCategoryRepository.findByUrlName(categoryUrl).get());
+        taskEntity.setCategory(taskCategoryRepository.findByUrlNameAndUser_UserName(categoryUrl, username).get());
         taskRepository.save(taskEntity);
     }
 
-    public void editTask(TaskDto dto) throws TaskNotFoundException {
+    public void editTask(TaskDto dto, String username) throws TaskNotFoundException {
         TaskEntity entity = taskRepository.findByUuid(dto.getUuid()).orElseThrow(() -> new TaskNotFoundException(dto.getUuid()));
-        TaskEntity modifiedEntity = modelMapper.map(dto, entity);
+        TaskEntity modifiedEntity = modelMapper.map(dto, entity, username);
         taskRepository.save(modifiedEntity);
     }
 }

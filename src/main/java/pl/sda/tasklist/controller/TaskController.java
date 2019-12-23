@@ -43,8 +43,17 @@ public class TaskController {
         return null;
     }
 
-    @PostMapping("/new-task")
-    ModelAndView newTask(@ModelAttribute CreateTaskForm form) {
-        return null;
+    @GetMapping("/{user}/{categoryUrl}/add-task")
+    ModelAndView getNewTaskPage() {
+        ModelAndView modelAndView = new ModelAndView("task-form");
+        modelAndView.addObject("form", new CreateTaskForm());
+
+        return modelAndView;
+    }
+
+    @PostMapping("/{user}/{categoryUrl}/add-task")
+    String newTask(@ModelAttribute CreateTaskForm form, @PathVariable String user, @PathVariable String categoryUrl) {
+        taskService.addTask(form, categoryUrl, user);
+        return "redirect:/{user}/{categoryUrl}";
     }
 }

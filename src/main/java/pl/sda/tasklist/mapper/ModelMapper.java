@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 public class ModelMapper {
 
     private final TaskCategoryRepository taskCategoryRepository;
-    private final TaskCategoryService taskCategoryService;
 
     public TaskEntity map(CreateTaskForm form) {
         TaskEntity entity = new TaskEntity();

@@ -19,12 +19,22 @@ import pl.sda.tasklist.service.TaskService;
 @Controller
 public class TaskController {
 
-    TaskService taskService;
-    ModelMapper modelMapper;
+    private final TaskService taskService;
+    private final TaskCategoryService taskCategoryService;
 
-    @GetMapping("/task-list")
-    ModelAndView getTaskPage() {
-        return null;
+    @GetMapping("/{user}/{categoryUrl}")
+    ModelAndView getTaskPage(@PathVariable String user, @PathVariable String categoryUrl) {
+        ModelAndView modelAndView = new ModelAndView("tasks");
+
+        TaskCategoryDto taskCategory = null;
+        try {
+            taskCategory = taskCategoryService.getCategoryByUrlNameAndUsername(categoryUrl, user);
+        } catch (TaskCategoryNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Task category not found", e);
+        }
+        modelAndView.addObject("tasks", taskCategory.getTasks());
+
+        return modelAndView;
     }
 
 

@@ -19,7 +19,8 @@ public class TaskCategoryEntity {
     private String urlName;
     private String description;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany()
+    @JoinColumn(name = "id_task_category")
     private List<TaskEntity> tasks;
 
     @ManyToOne

@@ -1,4 +1,4 @@
-package pl.sda.tasklist.mapper;
+package pl.sda.tasklist.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,6 @@ public class ModelMapper {
         dto.setDescription(entity.getDescription());
         dto.setDone(entity.isDone());
         dto.setPriority(entity.getPriority());
-        dto.setCategory(map(entity.getCategory()));
         return dto;
     }
 
@@ -49,7 +48,6 @@ public class ModelMapper {
         entity.setDescription(dto.getDescription());
         entity.setDone(dto.isDone());
         entity.setPriority(dto.getPriority());
-        entity.setCategory(taskCategoryRepository.findByUrlNameAndUser_UserName(dto.getCategory().getUrlName(), username).get());
         return entity;
     }
 

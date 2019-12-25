@@ -16,5 +16,4 @@ public class TaskDto {
     private String description;
     private boolean isDone;
     private Priority priority;
-    private TaskCategoryDto category;
 }

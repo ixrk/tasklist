@@ -19,7 +19,7 @@ public class TaskCategoryEntity {
     private String urlName;
     private String description;
 
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_task_category")
     private List<TaskEntity> tasks;
 

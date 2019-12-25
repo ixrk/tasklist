@@ -7,10 +7,13 @@ import pl.sda.tasklist.dao.TaskRepository;
 import pl.sda.tasklist.dto.CreateTaskForm;
 import pl.sda.tasklist.dto.TaskDto;
 import pl.sda.tasklist.exception.TaskNotFoundException;
+import pl.sda.tasklist.model.TaskCategoryEntity;
 import pl.sda.tasklist.model.TaskEntity;
 
+import javax.transaction.Transactional;
 import java.util.UUID;
 
+@Transactional
 @RequiredArgsConstructor
 @Service
 public class TaskService {
@@ -26,7 +29,11 @@ public class TaskService {
             taskEntity.setUuid(taskEntity.getUuid() + 1);
         }
         taskEntity.setDone(false);
-        taskRepository.save(taskEntity);
+
+        TaskCategoryEntity category = taskCategoryRepository.findByUrlNameAndUser_UserName(categoryUrl, username).get();
+        category.getTasks().add(taskEntity);
+
+        taskCategoryRepository.save(category);
     }
 
     public void editTask(TaskDto dto, String username) throws TaskNotFoundException {

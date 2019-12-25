@@ -3,6 +3,7 @@ package pl.sda.tasklist.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +34,7 @@ public class TaskController {
         } catch (TaskCategoryNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Task category not found", e);
         }
-        modelAndView.addObject("tasks", taskCategory.getTasks());
+        modelAndView.addObject("category", taskCategory);
 
         return modelAndView;
     }

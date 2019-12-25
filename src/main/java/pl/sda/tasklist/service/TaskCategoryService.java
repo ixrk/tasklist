@@ -8,7 +8,6 @@ import pl.sda.tasklist.dto.TaskCategoryDto;
 import pl.sda.tasklist.dto.TaskCategoryForm;
 import pl.sda.tasklist.exception.TaskCategoryNotFoundException;
 import pl.sda.tasklist.exception.UserNotFoundException;
-import pl.sda.tasklist.mapper.ModelMapper;
 import pl.sda.tasklist.model.TaskCategoryEntity;
 import pl.sda.tasklist.model.UserEntity;
 

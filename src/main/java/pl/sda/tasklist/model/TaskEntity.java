@@ -16,8 +16,4 @@ public class TaskEntity {
     private String description;
     private boolean isDone;
     private Priority priority;
-
-    @ManyToOne
-    @JoinColumn(name = "id_task")
-    private TaskCategoryEntity category;
 }

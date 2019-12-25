@@ -7,13 +7,9 @@ import pl.sda.tasklist.dao.TaskRepository;
 import pl.sda.tasklist.dto.CreateTaskForm;
 import pl.sda.tasklist.dto.TaskDto;
 import pl.sda.tasklist.exception.TaskNotFoundException;
-import pl.sda.tasklist.mapper.ModelMapper;
 import pl.sda.tasklist.model.TaskEntity;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -30,7 +26,6 @@ public class TaskService {
             taskEntity.setUuid(taskEntity.getUuid() + 1);
         }
         taskEntity.setDone(false);
-        taskEntity.setCategory(taskCategoryRepository.findByUrlNameAndUser_UserName(categoryUrl, username).get());
         taskRepository.save(taskEntity);
     }
 

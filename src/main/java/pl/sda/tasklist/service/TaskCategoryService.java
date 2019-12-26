@@ -52,6 +52,6 @@ public class TaskCategoryService {
     }
 
     public void deleteTaskCategory(String username, String urlName) {
-        taskCategoryRepository.deleteByUrlNameAndUser_UserName(username, urlName);
+        taskCategoryRepository.deleteByUser_UserNameAndUrlName(username, urlName);
     }
 }

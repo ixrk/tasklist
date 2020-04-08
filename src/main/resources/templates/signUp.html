@@ -6,6 +6,7 @@
     <title>Sign up Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/content/css/styles.css">
 </head>
 <body>
 
@@ -31,7 +32,9 @@
         <div class="form-group">
             <label for="password2">Confirm password</label>
             <input th:type="password" th:field="*{repeatedPassword}" class="form-control" id="password2"/>
-            <div th:if="${#fields.hasErrors('repeatedPassword')}" th:errors="*{repeatedPassword}">repeatedPassword Error</div>
+            <div th:if="${#fields.hasErrors('repeatedPassword')}" th:errors="*{repeatedPassword}">repeatedPassword
+                Error
+            </div>
         </div>
         <button th:type="submit" class="btn btn-primary">Sign Up</button>
     </form>

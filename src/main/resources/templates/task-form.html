@@ -6,13 +6,14 @@
     <title>Task form</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/content/css/styles.css">
 </head>
 <body>
 
 <div th:replace="fragments/navbar :: navbar"></div>
 
 <div class="container">
-    <h1 th:text="${edit} ? 'Edit task' : 'New task'"></h1>
+    <h2 th:text="${edit} ? 'Edit task' : 'New task'"></h2>
     <form th:if="${edit == true}" th:action="@{submit-task}" th:object="${taskForm}" method="post">
         <div class="form-group">
             <label for="name">Name</label>

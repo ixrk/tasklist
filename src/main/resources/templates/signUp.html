@@ -1,32 +1,51 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Sign up Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<div>
-    <div class="container">
-<!--        <div th:replace="fragments/header :: header"/>-->
-        <form th:action="@{/sign-up}" method="post" th:object="${signUpForm}">
-            <label>UserName</label>
-            <input type="text" th:field="*{userName}"/>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container">
+    <h2>Sign up</h2>
+    <form th:action="@{/sign-up}" method="post" th:object="${signUpForm}">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" th:field="*{userName}" class="form-control" id="username"/>
             <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">userName Error</div>
-            <br/>
-            <label>Birth Date</label>
-            <input type="date" th:field="*{birthDate}">
-            <br/>
-            <label>Password</label>
-            <input th:type="password" th:field="*{password}"/>
+        </div>
+        <div class="form-group">
+            <label for="birthdate">Birth date</label>
+            <input type="date" th:field="*{birthDate}" class="form-control" id="birthdate">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input th:type="password" th:field="*{password}" class="form-control" id="password"/>
             <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password Error</div>
-            <br/>
-            <label>Repeated Password</label>
-            <input th:type="password" th:field="*{repeatedPassword}"/>
+        </div>
+        <div class="form-group">
+            <label for="password2">Confirm password</label>
+            <input th:type="password" th:field="*{repeatedPassword}" class="form-control" id="password2"/>
             <div th:if="${#fields.hasErrors('repeatedPassword')}" th:errors="*{repeatedPassword}">repeatedPassword Error</div>
-            <br/>
-            <button th:type="submit">Sign Up</button>
-        </form>
-    </div>
+        </div>
+        <button th:type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
 </body>
 </html>

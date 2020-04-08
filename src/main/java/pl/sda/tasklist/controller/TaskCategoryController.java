@@ -50,6 +50,7 @@ public class TaskCategoryController {
     @GetMapping("/{user}/{categoryUrlName}/add-task")
     ModelAndView getNewTaskPage(@PathVariable String user, @PathVariable String categoryUrlName) {
         ModelAndView modelAndView = new ModelAndView("task-form");
+        modelAndView.addObject("edit", false);
         modelAndView.addObject("taskForm", new CreateTaskForm());
         modelAndView.addObject("priorities", Priority.values());
         modelAndView.addObject("user", user);
@@ -59,8 +60,8 @@ public class TaskCategoryController {
     }
 
     @PostMapping("/{user}/{categoryUrlName}/add-task")
-    String newTask(@ModelAttribute CreateTaskForm form, @PathVariable String user, @PathVariable String categoryUrlName) {
-        taskService.addTask(form, categoryUrlName, user);
+    String newTask(@ModelAttribute CreateTaskForm taskForm, @PathVariable String user, @PathVariable String categoryUrlName) {
+        taskService.addTask(taskForm, categoryUrlName, user);
         return "redirect:/{user}/{categoryUrlName}";
     }
 

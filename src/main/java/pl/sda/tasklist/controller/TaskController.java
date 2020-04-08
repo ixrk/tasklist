@@ -31,12 +31,13 @@ public class TaskController {
             return "redirect:/{user}/{categoryUrlName}";
         } else  {
             model.addAttribute("taskForm", taskService.getTaskAsForm(uuidHex));
+            model.addAttribute("edit", true);
             return "task-form";
         }
     }
 
     @PostMapping("/submit-task")
-    String saveTaskForm(@PathVariable String uuidHex, @RequestParam CreateTaskForm taskForm) throws TaskNotFoundException {
+    String saveTaskForm(@PathVariable String uuidHex, @ModelAttribute CreateTaskForm taskForm) throws TaskNotFoundException {
         taskService.editTask(taskForm, uuidHex);
         return "redirect:/{user}/{categoryUrlName}";
     }

@@ -25,12 +25,12 @@
                         <p th:text="${task.description}" class="card-text"></p>
                     </div>
                     <div class="card-body">
-                        <form th:action="@{{categoryUrl}/{task}/edit(categoryUrl=${category.urlName}, task=${task.uuidHex})}"
+                        <form th:action="@{{categoryUrl}/{task}/edit-task(categoryUrl=${category.urlName}, task=${task.uuidHex})}"
                               method="post">
                             <div class="btn-group w-100">
-                                <button type="submit" value="switchDone" class="btn btn-light">Done</button>
-                                <button type="submit" value="edit" class="btn btn-light">Edit</button>
-                                <button type="submit" value="delete" class="btn btn-light">Delete</button>
+                                <button type="submit" name="taskAction" value="switchDone" class="btn btn-light">Done</button>
+                                <button type="submit" name="taskAction" value="edit" class="btn btn-light">Edit</button>
+                                <button type="submit" name="taskAction" value="delete" class="btn btn-light">Delete</button>
                             </div>
                         </form>
                     </div>

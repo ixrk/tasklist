@@ -31,24 +31,12 @@ public class ModelMapper {
     public TaskDto map(TaskEntity entity) {
         TaskDto dto = new TaskDto();
         dto.setUuid(entity.getUuid());
-        dto.setUuidHex(Long.toHexString(entity.getUuid()));
+        dto.setUuidHex(Long.toString(entity.getUuid(), 32));
         dto.setName(entity.getName());
         dto.setDescription(entity.getDescription());
         dto.setDone(entity.isDone());
         dto.setPriority(entity.getPriority());
         return dto;
-    }
-
-    public TaskEntity map(TaskDto dto, TaskEntity baseEntity, String username) {
-        TaskEntity entity = new TaskEntity();
-        entity.setId(baseEntity.getId());
-
-        entity.setUuid(dto.getUuid());
-        entity.setName(dto.getName());
-        entity.setDescription(dto.getDescription());
-        entity.setDone(dto.isDone());
-        entity.setPriority(dto.getPriority());
-        return entity;
     }
 
     public TaskCategoryDto map(TaskCategoryEntity categoryEntity) {

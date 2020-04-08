@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface TaskRepository extends JpaRepository<TaskEntity, Long> {
     Optional<TaskEntity> findByUuid(long uuid);
     boolean existsByUuid(long uuid);
+    void deleteByUuid(long uuid);
 }

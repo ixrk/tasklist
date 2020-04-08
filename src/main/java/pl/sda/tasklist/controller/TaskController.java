@@ -22,7 +22,7 @@ public class TaskController {
     private final TaskService taskService;
 
     @PostMapping("/edit-task")
-    String editTask(@PathVariable String uuidHex, @RequestParam String taskAction, @ModelAttribute CreateTaskForm taskForm) throws TaskNotFoundException {
+    String editTask(@PathVariable String uuidHex, @RequestParam String taskAction, Model model) throws TaskNotFoundException {
         if (taskAction.equals("switchDone")) {
             taskService.switchDone(uuidHex);
             return "redirect:/{user}/{categoryUrlName}";
@@ -30,8 +30,14 @@ public class TaskController {
             taskService.deleteTask(uuidHex);
             return "redirect:/{user}/{categoryUrlName}";
         } else  {
-            taskService.editTask(taskForm, uuidHex);
-            return "redirect:/{user}/{categoryUrlName}";
+            model.addAttribute("taskForm", taskService.getTaskAsForm(uuidHex));
+            return "task-form";
         }
+    }
+
+    @PostMapping("/submit-task")
+    String saveTaskForm(@PathVariable String uuidHex, @RequestParam CreateTaskForm taskForm) throws TaskNotFoundException {
+        taskService.editTask(taskForm, uuidHex);
+        return "redirect:/{user}/{categoryUrlName}";
     }
 }

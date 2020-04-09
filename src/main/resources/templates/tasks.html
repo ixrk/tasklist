@@ -44,7 +44,7 @@
 
     <div class="row">
         <th:block th:each="task : ${category.tasks}">
-            <div th:if="${task.done}" class="col-sm-6 my-2">
+            <div th:if="${task.done}" class="col-sm-6 col-lg-4 my-2">
                 <div class="card">
                     <div class="card-body">
                         <h5 th:text="${task.name}" class="card-title"></h5>

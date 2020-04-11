@@ -35,7 +35,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .rememberMe().key("change-me")
                 .and()
-                .logout().logoutSuccessUrl("/").deleteCookies("JSESSIONID");
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/").invalidateHttpSession(true).deleteCookies("JSESSIONID");
 //        For H2 console
         http.csrf()
                 .ignoringAntMatchers("/h2/**");

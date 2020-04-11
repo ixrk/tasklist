@@ -16,14 +16,12 @@ import javax.servlet.http.HttpSession;
 public class SignInController {
 
     @GetMapping("/sign-in")
-    ModelAndView getSignInPage(){
-        ModelAndView modelAndView = new ModelAndView("signIn");
-        return modelAndView;
+    String getSignInPage(){
+        return "signIn";
     }
 
     @GetMapping("/logout")
-    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
-        ModelAndView modelAndView = new ModelAndView("signIn");
+    String logout(HttpServletRequest request, HttpServletResponse response) {
         SecurityContextHolder.clearContext();
         HttpSession session = request.getSession(false);
         if(session != null) {
@@ -33,6 +31,6 @@ public class SignInController {
             cookie.setMaxAge(0);
         }
 
-        return modelAndView;
+        return "redirect:/";
     }
 }

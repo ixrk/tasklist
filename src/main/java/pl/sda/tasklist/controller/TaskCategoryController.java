@@ -65,9 +65,9 @@ public class TaskCategoryController {
         return "redirect:/{user}/{categoryUrlName}";
     }
 
-    @PostMapping("/delete-category")
-    String deleteTaskCategory(@ModelAttribute String urlName, Principal principal) {
-        taskCategoryService.deleteTaskCategory(urlName, principal.getName());
+    @GetMapping("/{user}/{categoryUrlName}/delete-category")
+    String deleteTaskCategory(@PathVariable String categoryUrlName, @PathVariable String user) {
+        taskCategoryService.deleteTaskCategory(user, categoryUrlName);
         return "redirect:/";
     }
 }

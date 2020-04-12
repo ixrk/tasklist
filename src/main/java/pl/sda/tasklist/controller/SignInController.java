@@ -19,18 +19,4 @@ public class SignInController {
     String getSignInPage(){
         return "signIn";
     }
-
-    @GetMapping("/logout")
-    String logout(HttpServletRequest request, HttpServletResponse response) {
-        SecurityContextHolder.clearContext();
-        HttpSession session = request.getSession(false);
-        if(session != null) {
-            session.invalidate();
-        }
-        for(Cookie cookie : request.getCookies()) {
-            cookie.setMaxAge(0);
-        }
-
-        return "redirect:/";
-    }
 }

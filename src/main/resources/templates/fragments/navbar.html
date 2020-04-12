@@ -29,7 +29,9 @@
                 <a class="nav-link" th:href="@{/sign-up}">Sign-up</a>
             </li>
             <li sec:authorize="isAuthenticated()" class="nav-item">
-                <a class="nav-link" th:href="@{/logout}">Logout</a>
+                <form class="form-inline" th:action="@{/logout}" method="post" id="logout-link">
+                    <a href="javascript:" onclick="this.parentNode.submit()" class="nav-link">Logout</a>
+                </form>
             </li>
         </ul>
     </div>

@@ -13,10 +13,44 @@
 <div th:replace="fragments/navbar :: navbar"></div>
 
 <div class="container">
-    <h1>SDA final project application</h1>
-    <p>
-        Task management app written using Spring Boot
-    </p>
+    <h1>Tasklist</h1>
+    <h2>About</h2>
+    <p>Check out <a href="https://github.com/ixrk/tasklist">https://github.com/ixrk/tasklist</a></p>
+    <p>Tasklist is a web application based on the Spring framework created to help you manage your tasks. You can group them in categories, mark as done, edit and delete.</p>
+    <h3>Used tools</h3>
+    <ul>
+        <li>Spring Boot</li>
+        <li>Thymeleaf</li>
+        <li>Bootstrap</li>
+        <li>Spring Security</li>
+        <li>Spring Data JPA</li>
+        <li>Apache Commons Lang 3</li>
+        <li>H2 database (development profile)</li>
+        <li>MariaDB database (production profile)</li>
+    </ul>
+    <h2>How to use</h2>
+    <h3>Prerequisites</h3>
+    <ul>
+        <li>JDK &gt;= 1.8</li>
+        <li>MySQL or a database compatible with it.</li>
+        <li>Docker (optional)</li>
+    </ul>
+    <h3>Prepare</h3>
+    <ol>
+        <li>Change <code>spring.datasource.*</code> values in <code>src/main/resources/application-prod.properties</code> to match your database.</li>
+        <li>Change <code>.rememberMe().key(&quot;change-me&quot;)</code> parameter in <code>src/main/java/pl/sda/tasklist/config/SpringSecurityConfiguration.java</code></li>
+    </ol>
+    <h3>Build</h3>
+    <pre><code class="language-shell">$ ./mvnw -P prod clean package
+</code></pre>
+    <h3>Run</h3>
+    <pre><code class="language-shell">$ java -jar target/tasklist-*.jar
+</code></pre>
+    <h3>Containerize</h3>
+    <pre><code class="language-shell"># docker build -t tasklist .
+# docker run -t -p 8080:8080 tasklist
+</code></pre>
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

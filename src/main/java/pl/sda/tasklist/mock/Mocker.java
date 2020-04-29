@@ -42,15 +42,11 @@ public class Mocker {
         signUpForm.setPassword("Password1");
         userService.saveUser(signUpForm, "ROLE_USER");
 
+
         TaskCategoryForm taskCategoryForm1 = new TaskCategoryForm();
         taskCategoryForm1.setName("Shopping list");
         taskCategoryForm1.setDescription("This week's shopping list");
         taskCategoryService.addTaskCategoryForUser(username, taskCategoryForm1);
-
-        TaskCategoryForm taskCategoryForm2 = new TaskCategoryForm();
-        taskCategoryForm2.setName("Work checklist");
-        taskCategoryForm2.setDescription("Things to do before leaving");
-        taskCategoryService.addTaskCategoryForUser(username, taskCategoryForm2);
 
         String urlName = taskCategoryService.getAllTaskCategoriesByUser(username).get(0).getUrlName();
         CreateTaskForm createTaskForm1 = new CreateTaskForm();
@@ -68,19 +64,54 @@ public class Mocker {
         taskService.addTask(createTaskForm2, urlName, username);
 
         CreateTaskForm createTaskForm3 = new CreateTaskForm();
-        createTaskForm3.setName("Cereal");
-        createTaskForm3.setDescription("Corn Flakes");
+        createTaskForm3.setName("Milk");
+        createTaskForm3.setDescription("UHT 3.2%");
         createTaskForm3.setPriority(Priority.MEDIUM);
         createTaskForm3.setCategoryUrl(urlName);
         taskService.addTask(createTaskForm3, urlName, username);
 
         CreateTaskForm createTaskForm4 = new CreateTaskForm();
-        createTaskForm4.setName("Cereal");
-        createTaskForm4.setDescription("Corn Flakes");
+        createTaskForm4.setName("Bell pepper");
+        createTaskForm4.setDescription("2x green");
         createTaskForm4.setPriority(Priority.MEDIUM);
         createTaskForm4.setCategoryUrl(urlName);
         taskService.addTask(createTaskForm4, urlName, username);
 
+        TaskCategoryForm taskCategoryForm2 = new TaskCategoryForm();
+        taskCategoryForm2.setName("Work checklist");
+        taskCategoryForm2.setDescription("Things to do before leaving");
+        taskCategoryService.addTaskCategoryForUser(username, taskCategoryForm2);
+
+        urlName = taskCategoryService.getAllTaskCategoriesByUser(username).get(1).getUrlName();
+        CreateTaskForm createTaskForm5 = new CreateTaskForm();
+        createTaskForm5.setName("Clean the workshop");
+        createTaskForm5.setPriority(Priority.MEDIUM);
+        createTaskForm5.setCategoryUrl(urlName);
+        taskService.addTask(createTaskForm5, urlName, username);
+
+        CreateTaskForm createTaskForm6 = new CreateTaskForm();
+        createTaskForm6.setName("Switch off the lights");
+        createTaskForm6.setPriority(Priority.MEDIUM);
+        createTaskForm6.setCategoryUrl(urlName);
+        taskService.addTask(createTaskForm6, urlName, username);
+
+        CreateTaskForm createTaskForm7 = new CreateTaskForm();
+        createTaskForm7.setName("Close doors");
+        createTaskForm7.setPriority(Priority.MEDIUM);
+        createTaskForm7.setCategoryUrl(urlName);
+        taskService.addTask(createTaskForm7, urlName, username);
+
+        CreateTaskForm createTaskForm8 = new CreateTaskForm();
+        createTaskForm8.setName("wash the tools");
+        createTaskForm8.setPriority(Priority.MEDIUM);
+        createTaskForm8.setCategoryUrl(urlName);
+        taskService.addTask(createTaskForm8, urlName, username);
+
+        CreateTaskForm createTaskForm9 = new CreateTaskForm();
+        createTaskForm9.setName("Say goodbye");
+        createTaskForm9.setPriority(Priority.MEDIUM);
+        createTaskForm9.setCategoryUrl(urlName);
+        taskService.addTask(createTaskForm9, urlName, username);
 
     }
 

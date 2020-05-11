@@ -17,8 +17,9 @@ jobs:
       - run: mvn package
       - store_test_results:
           path: target/surefire-reports
+      - run: cp target/tasklist-*.jar tasklist.jar
       - store_artifacts:
-          path: target/tasklist-*.jar
+          path: tasklist.jar
 
 workflows:
   build-test:
